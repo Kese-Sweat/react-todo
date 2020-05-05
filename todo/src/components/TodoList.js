@@ -1,11 +1,15 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import '../styles/App.css';
 import { useTodo } from '../hooks'
 
 function TodoList (){
     const [todoText, setTodoText]= useState('')
-    const { todos, addTodo, removeTodo } = useTodo() // grabs todo state from duck
+    const { todos, addTodo, removeTodo, getTodoList } = useTodo() // grabs todo state from duck
     console.log(todos)
+
+    useEffect (() =>{
+        getTodoList()
+    },[])
 
     function handleSubmit(e){
         e.preventDefault()

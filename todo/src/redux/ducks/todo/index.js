@@ -1,8 +1,10 @@
 // 1. imports
 import { useEffect } from "react"
 import { useSelector, useDispatch } from "react-redux"
+import axios from 'axios'
 
 // 2. action definitions
+const GET_TODOS =  'todo/GET_TODOS'
 const ADD_TODO = 'todo/ADD_TODO'
 const REMOVE_TODO = 'todo/REMOVE_TODO'
 
@@ -21,14 +23,20 @@ const makeId = function() {
 // 4. reducer
 export default (state = initialState, action) => {
   switch (action.type) {
-    case ADD_TODO: //adds todo
-        return{
-          ...state, 
-            todos: [
-            ...state.todos,
-             {id: makeId(), text: action.payload, status: 'incomplete'} // id is calling the id function
-            ]
-          } 
+    case GET_TODOS:
+      return {
+        ...state,
+        todos: action.payload
+      }
+   // case ADD_TODO: //adds todo
+       // return{
+         // ...state, 
+          //  todos: [
+           // ...state.todos,
+           // action.payload
+             //{id: makeId(), text: action.payload, status: 'active'} // id is calling the id function
+         //   ]
+        //  } 
         // must return state whenever you do an action..will give me my previous state todo and give me a new todo
       case REMOVE_TODO:
         return{
@@ -42,16 +50,33 @@ export default (state = initialState, action) => {
 
 // 5. action creators
 function addTheTodo(text) {
-  return {
-    type: ADD_TODO,
-    payload: text
+  return dispatch =>{
+    axios.post('./todos', {text: text, status: 'active'})
+    .then(resp =>{
+      dispatch(getTodos())
+    })
   }
+//  return {
+  //  type: ADD_TODO,
+ //   payload: text
+  //}
 }
 
 function removeTheTodo(id) {
   return {
     type: REMOVE_TODO,
     payload: id
+  }
+}
+
+function getTodos(){
+  return dispatch => {
+    axios.get('/todos').then(resp =>{
+      dispatch({
+        type: GET_TODOS,
+        payload: resp.data
+      })
+    })
   }
 }
 // 6. custom hook
@@ -61,6 +86,7 @@ export function useTodo() {
 
   const addTodo = (text) => dispatch(addTheTodo(text))
   const removeTodo = (id) => dispatch(removeTheTodo(id))
+  const getTodoList = () => dispatch(getTodos())
 
-  return { todos, addTodo, removeTodo }
+  return { todos, addTodo, removeTodo, getTodoList }
 }
