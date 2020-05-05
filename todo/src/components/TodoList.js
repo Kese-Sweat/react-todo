@@ -4,23 +4,29 @@ import { useTodo } from '../hooks'
 
 function TodoList (){
     const [todoText, setTodoText]= useState('')
-    const { todos } = useTodo() // grabs todo state from duck
+    const { todos, addTodo, removeTodo } = useTodo() // grabs todo state from duck
     console.log(todos)
 
     function handleSubmit(e){
         e.preventDefault()
+        addTodo(todoText)
+        setTodoText('')
     }
     return(
         <div className="TodoList">
             <h1>Todos</h1>
             <form onSubmit={handleSubmit}>
                 <input
+                value ={todoText}
                 onChange={(e) => setTodoText(e.target.value)}
                  placeholder="what needs to be done?" />
             </form>
             <ul>
                 {todos.map(todo => { 
-                    return <li>{todo.text}</li>
+                    return <li key={todo.id}>
+                        <span>{todo.text}</span>
+                    <button onClick={() => removeTodo(todo.id)}>x</button>
+                    </li>
                 })}
                 
             </ul>
