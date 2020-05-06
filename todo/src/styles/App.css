@@ -2,6 +2,7 @@
   margin: 0;
   padding: 0;
   box-sizing: border-box;
+  list-style: none;
 }
 
 .TodoList{
@@ -20,4 +21,18 @@ body{
 
 .myList{
   width: 24%;
+}
+
+.tobeDone{
+
+  width: 24%
+}
+
+.footer{
+    justify-content: space-between;
+    display: flex;
+}
+
+.clearCompleted{
+  margin-left: 40px;
 }

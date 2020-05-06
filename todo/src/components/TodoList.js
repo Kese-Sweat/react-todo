@@ -20,7 +20,7 @@ function TodoList (){
         <div className="TodoList">
             <h1>Todos</h1>
             <form onSubmit={handleSubmit}>
-                <input
+                <input className="tobeDone"
                 value ={todoText}
                 onChange={(e) => setTodoText(e.target.value)}
                  placeholder="what needs to be done?" />
@@ -31,7 +31,18 @@ function TodoList (){
                         <span>{todo.text}</span>
                     <button onClick={() => removeTodo(todo.id)}>x</button>
                     </li>
+                    
                 })}
+                <div className="footer">
+                        <span>count</span>
+                        <div >
+                            <button> All </button>
+                            <button> Active </button>
+                            <button> Completed </button>
+                            <button className="clearCompleted"> Clear Completed</button>
+                        </div>
+
+                    </div>
                 
             </ul>
         </div>
