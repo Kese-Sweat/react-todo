@@ -25,9 +25,9 @@ function TodoList (){
                 onChange={(e) => setTodoText(e.target.value)}
                  placeholder="what needs to be done?" />
             </form>
-            <ul>
+            <ul className="myList">
                 {todos.map(todo => { 
-                    return <li key={todo.id}>
+                    return <li className="todoLi" key={todo.id}>
                         <span>{todo.text}</span>
                     <button onClick={() => removeTodo(todo.id)}>x</button>
                     </li>

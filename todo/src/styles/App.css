@@ -13,3 +13,11 @@ body{
 
   font-family: Arial, Helvetica, sans-serif;
 }
+
+.todoLi{
+ border-bottom-style: inset;
+}
+
+.myList{
+  width: 24%;
+}
