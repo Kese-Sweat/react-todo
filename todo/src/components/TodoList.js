@@ -17,20 +17,28 @@ function TodoList (){
         setTodoText('')
     }
     return(
+       
         <div className="TodoList">
-            <h1>Todos</h1>
+            
+         
             <form onSubmit={handleSubmit}>
                 <input className="tobeDone"
                 value ={todoText}
                 onChange={(e) => setTodoText(e.target.value)}
                  placeholder="what needs to be done?" />
             </form>
+            
             <ul className="myList">
                 {todos.map(todo => { 
-                    return <li className="todoLi" key={todo.id}>
+                    return <div>
+                        <li className="todoLi" key={todo.id}>
+                        <input type="checkbox"></input>
                         <span>{todo.text}</span>
-                    <button onClick={() => removeTodo(todo.id)}>x</button>
+                        
+                    <button className="xButton" onClick={() => removeTodo(todo.id)}>x</button>
                     </li>
+                    </div>
+                    
                     
                 })}
                 <div className="footer">
@@ -46,6 +54,7 @@ function TodoList (){
                 
             </ul>
         </div>
+        
     )
 }
 
