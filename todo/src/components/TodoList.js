@@ -25,7 +25,7 @@ function TodoList (){
                 <input className="tobeDone"
                 value ={todoText}
                 onChange={(e) => setTodoText(e.target.value)}
-                 placeholder="what needs to be done?" />
+                 placeholder="What needs to be done?" />
             </form>
             
             <ul className="myList">
@@ -33,9 +33,10 @@ function TodoList (){
                     return <div>
                         <li className="todoLi" key={todo.id}>
                         <input type="checkbox"></input>
-                        <span>{todo.text}</span>
-                        
+                        <span className ="todoItems">{todo.text}</span>
+                        <div>
                     <button className="xButton" onClick={() => removeTodo(todo.id)}>x</button>
+                    </div>
                     </li>
                     </div>
                     
